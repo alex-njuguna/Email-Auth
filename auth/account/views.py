@@ -27,7 +27,7 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):  
         user.is_active = True  
         user.save()  
-        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')  
+        return redirect("account:signin")
     else:  
         return HttpResponse('Activation link is invalid!')  
 
@@ -56,14 +56,6 @@ def signup(request):
             email.send()
 
             return HttpResponse("Please confirm your email account")
-            # password1 = form.cleaned_data.get("password1")
-            # password2 = form.cleaned_data.get("password2")
-
-            # if password1 != password2:
-            #     messages.error(request, "Passwords do not match")
-            # else:
-            #     user.save()
-            #     return redirect("account:signin")
         
     form = SignUpForm()
 
