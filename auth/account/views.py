@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 
 from custom_user.models import User
@@ -60,4 +60,11 @@ def signin(request):
         "title": "sign in",
         "form": form
     })
+
+
+def signout(request):
+
+    logout(request)
+
+    return redirect("account:signin")
 
